@@ -15,6 +15,37 @@ var connection = mysql.createConnection({
   database: "employee_db",
 });
 
+const idArray = [
+  {
+    name: "Sales Lead",
+    value: 1
+  },
+  {
+    name: "Salesman",
+    value: 2
+  },
+  {
+    name: "Junior Developer",
+    value: 3
+  },
+  {
+    name: "Software Engineer",
+    value: 4
+  },
+  {
+    name: "Lawyer",
+    value: 5,
+  },
+  {
+    name: "Accountant",
+    value: 6,
+  },
+  {
+    name: "Finance Analyst",
+    value: 7,
+  }
+]; 
+
 connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
@@ -33,6 +64,7 @@ function startTracker() {
         "View All Employees by Role",
         "Add Employee",
         "Add Department",
+        "Update Employee",
         "EXIT",
       ],
     })
@@ -47,6 +79,8 @@ function startTracker() {
         addEmployee();
       } else if (answer.start === "Add Department") {
         addDepartment();
+      } else if (answer.start === "Update Employee") {
+        updateEmployeeRole();
       } else if (answer.start === "EXIT") {
         connection.end;
       }
@@ -101,36 +135,7 @@ function allEmployeesByRole() {
 
 
 function addEmployee() {
-  const idArray = [
-    {
-      name: "Sales Lead",
-      value: 1
-    },
-    {
-      name: "Salesman",
-      value: 2
-    },
-    {
-      name: "Junior Developer",
-      value: 3
-    },
-    {
-      name: "Software Engineer",
-      value: 4
-    },
-    {
-      name: "Lawyer",
-      value: 5,
-    },
-    {
-      name: "Accountant",
-      value: 6,
-    },
-    {
-      name: "Finance Analyst",
-      value: 7,
-    }
-  ];
+ 
     inquirer
         .prompt([
             {
@@ -186,4 +191,33 @@ function addDepartment() {
                 console.table(data);
             })
     }
+}
+
+function updateEmployeeRole() {
+  connection.query(
+    "SELECT first_name, last_name, title FROM employees INNER JOIN role ON employees.role_id = role.id ",
+    function (err, data) {
+      if (err) throw err;
+      console.table(data);
+      inquirer
+        .prompt([
+          {
+            name: "indexNumber",
+            type: "input",
+            message: "Please enter the index of the employee you want to update"
+          },
+          {
+            name: "newRole",
+            type: "list",
+            message: "What role would you like to update this employee to?",
+            choices: idArray
+          },
+        ]).then(function (answers) {
+          connection.query("UPDATE employees SET role_id = ? WHERE id = ?"),[answers.newRole, newNumer],
+          function (err, data) {
+            if (err) throw err;
+            allEmployees();
+          }
+        })
+      });
 }
