@@ -31,12 +31,12 @@ Steps to participate in this project:
 
 <h2> Using the terminal log, open into the working file. You must be in the working file in order to run node server.js correctly. Follow the prompts in the example starting with node server.js </h2>
 
-Example: <img src="" alt="NodeExample">
+Example: <img src="images\Tracker1.png" alt="NodeExample">
 
 
 <h2> After answering the prompted questions, a generate table should appear. It should take into account the user's input and display relevant data. Look at the picture for a reference </h2>
 
-<img src="" alt="ReadMeExample">
+<img src="images\Tracker 2.png" alt="ReadMeExample">
 
 
 # Credits
