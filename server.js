@@ -81,16 +81,24 @@ function allEmployeesByDepartment() {
                 })
         });
 }
-// function allEmployeesByDepartment() {
-//   connection.query(
-//     "SELECT first_name, last_name, department_name, title, salary FROM employees INNER JOIN role ON employees.role_id = role.id INNER JOIN department ON role.department_id = department.id;",
-//     function (err, data) {
-//       if (err) throw err;
-//       console.table(data);
-//       startTracker();
-//     }
-//   );
-// }
+function allEmployeesByRole() {
+    inquirer
+        .prompt({
+            name: "selection",
+            message: "Which role are you looking for?",
+            type: "list",
+            choices: ["Sales Lead","Salesman","Junior Developer", "Software Engineer", "Lawyer", "Accountant", "Finance Analyst"],
+        }).then(function ({selection}) {
+             connection.query(
+              "SELECT first_name, last_name, title, salary FROM employees INNER JOIN role ON employees.role_id = role.id WHERE role.title = ?", [selection],
+                function (err, data) {
+              if (err) throw err;
+             console.table(data);
+                    startTracker();
+                })
+    });
+}
+
 
 // function allEmployeesByDepartment() {
 //   connection.query(
