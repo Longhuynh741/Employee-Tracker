@@ -101,8 +101,38 @@ function allEmployeesByRole() {
 
 
 function addEmployee() {
+  const idArray = [
+    {
+      name: "Sales Lead",
+      value: 1
+    },
+    {
+      name: "Salesman",
+      value: 2
+    },
+    {
+      name: "Junior Developer",
+      value: 3
+    },
+    {
+      name: "Software Engineer",
+      value: 4
+    },
+    {
+      name: "Lawyer",
+      value: 5,
+    },
+    {
+      name: "Accountant",
+      value: 6,
+    },
+    {
+      name: "Finance Analyst",
+      value: 7,
+    }
+  ];
     inquirer
-        .prompt(
+        .prompt([
             {
                 name: "firstName",
                 type: "input",
@@ -114,25 +144,24 @@ function addEmployee() {
                 type: "input",
                 message: "What is the Employee's last name?",
             },
-            {
-                name: "employeeRole",
-                type: "list",
-                message: "What is the Employee's role?",
-                choices: ["Sales Lead", "Salesman", "Junior Developer", "Software Engineer", "Lawyer", "Accountant", "Finance Analyst"]
+          {
+            name: "employeeRole",
+            type: "list",
+            message: "What is the Employee's role?",
+            choices: idArray
             },
-        ).then(function (answers) {
+        ]).then(function (answers) {
+            console.log(answers.employeeRole)
             connection.query("INSERT INTO employees (first_name, last_name, role_id) VALUES (?, ?, ?)", [answers.firstName, answers.lastName, answers.employeeRole],
                 function (err, data) {
-                    if (err) throw err;
-                    console.table(data);
+                  if (err) throw err;
+                    allEmployees();
                     startTracker();
                 }
             );
-        })
+          }
+        )
 }          
-            
-            
-
 function addDepartment() {
     inquirer
         .prompt(
