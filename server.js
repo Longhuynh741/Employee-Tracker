@@ -1,6 +1,5 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-const { listenerCount } = require("process");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -13,7 +12,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "Loser741?",
-  database: "employees_db"
+  database: "employee_db"
 });
 
 connection.connect(function(err) {
@@ -24,10 +23,10 @@ connection.connect(function(err) {
 
 function startTracker() {
     inquirer
-        .promt({
+        .prompt({
             name: "start",
             message: "What would you like to do?",
-            type: list,
+            type: "list",
             choices: [
                 "View All Employees",
                 "View All Employees by Department",
@@ -57,3 +56,14 @@ function startTracker() {
             }
         });
 }
+
+
+function allEmployees() {
+    connection.query(
+        "SELECT first_name, last_name, department_name, title, salary FROM employees INNER JOIN role ON employees.role_id = role.id INNER JOIN department ON role.department_id = department.id;",
+     function (err, data) {
+        if (err) throw err;
+        console.table(data);
+    })
+}
+    
