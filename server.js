@@ -100,24 +100,61 @@ function allEmployeesByRole() {
 }
 
 
-// function allEmployeesByDepartment() {
-//   connection.query(
-//     "SELECT first_name, last_name, department_name, title, salary FROM employees INNER JOIN role ON employees.role_id = role.id INNER JOIN department ON role.department_id = department.id;",
-//     function (err, data) {
-//       if (err) throw err;
-//       console.table(data);
-//       startTracker();
-//     }
-//   );
-// }
+function addEmployee() {
+    inquirer
+        .prompt(
+            {
+                name: "firstName",
+                type: "input",
+                message: "What is the Employee's first name?",
+            },
+        
+            {
+                name: "lastName",
+                type: "input",
+                message: "What is the Employee's last name?",
+            },
+            {
+                name: "employeeRole",
+                type: "list",
+                message: "What is the Employee's role?",
+                choices: ["Sales Lead", "Salesman", "Junior Developer", "Software Engineer", "Lawyer", "Accountant", "Finance Analyst"]
+            },
+        ).then(function (answers) {
+            connection.query("INSERT INTO employees (first_name, last_name, role_id) VALUES (?, ?, ?)", [answers.firstName, answers.lastName, answers.employeeRole],
+                function (err, data) {
+                    if (err) throw err;
+                    console.table(data);
+                    startTracker();
+                }
+            );
+        })
+}          
+            
+            
 
-// function allEmployeesByDepartment() {
-//   connection.query(
-//     "SELECT first_name, last_name, department_name, title, salary FROM employees INNER JOIN role ON employees.role_id = role.id INNER JOIN department ON role.department_id = department.id;",
-//     function (err, data) {
-//       if (err) throw err;
-//       console.table(data);
-//       startTracker();
-//     }
-//   );
-// }
+function addDepartment() {
+    inquirer
+        .prompt(
+            {
+                name: "departmentName",
+                type: "input",
+                message: "Please Enter a new department"
+            }
+        ).then(function (answers) {
+            connection.query("INSERT INTO department (department_name) VALUES (?)", [answers.departmentName],
+                function (err, data) {
+                    if (err) throw err;
+                    viewAllDepartments();
+                    startTracker();
+                }
+            );
+        });
+    function viewAllDepartments(){
+        connection.query("Select * from department", 
+            function (err, data) {
+                if (err) throw err;
+                console.table(data);
+            })
+    }
+}
