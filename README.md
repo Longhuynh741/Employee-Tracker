@@ -1,137 +1,73 @@
-# Employee-Tracker# Unit 12 MySQL Homework: Employee Tracker
+# Employee Tracker ![<Test>](https://img.shields.io/badge/License-MIT-blue.svg) 
 
-Developers are often tasked with creating interfaces that make it easy for non-developers to view and interact with information stored in databases. Often these interfaces are known as **C**ontent **M**anagement **S**ystems. In this homework assignment, your challenge is to architect and build a solution for managing a company's employees using node, inquirer, and MySQL.
+Project Demonstration: 
 
-## Instructions
+<hr>
 
-Design the following database schema containing three tables:
+This project was created for the intents and purposes of building a command line application to interact with a mySQL database. The objective of the project was for the user to be able to generate data tables using information generated through prompts with user-input to retrieve specific data from a SQL database. Once information has been gathered from the prompts, our terminal will generate the data retrieved from the SQL database and display it. Execution of this requires that we: <ul>
+<li> Utilize npm packages to generate the prompts and mySQL functions
+<li> Being able to use mySQL workbench to generate the database
+<li> Troubleshooting errors along the way
+</ul>
 
-![Database Schema](Assets/schema.png)
+The project is done through the use of [Visual Studio Code](https://code.visualstudio.com) and [MySQL Workbench](https://www.mysql.com/products/workbench/) with aide from [NPM documentations](https://www.npmjs.com/).
+# Installation
 
-* **department**:
+Steps to participate in this project:
 
-  * **id** - INT PRIMARY KEY
-  * **name** - VARCHAR(30) to hold department name
-
-* **role**:
-
-  * **id** - INT PRIMARY KEY
-  * **title** -  VARCHAR(30) to hold role title
-  * **salary** -  DECIMAL to hold role salary
-  * **department_id** -  INT to hold reference to department role belongs to
-
-* **employee**:
-
-  * **id** - INT PRIMARY KEY
-  * **first_name** - VARCHAR(30) to hold employee first name
-  * **last_name** - VARCHAR(30) to hold employee last name
-  * **role_id** - INT to hold reference to role employee has
-  * **manager_id** - INT to hold reference to another employee that manages the employee being Created. This field may be null if the employee has no manager
-  
-Build a command-line application that at a minimum allows the user to:
-
-  * Add departments, roles, employees
-
-  * View departments, roles, employees
-
-  * Update employee roles
-
-Bonus points if you're able to:
-
-  * Update employee managers
-
-  * View employees by manager
-
-  * Delete departments, roles, and employees
-
-  * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
-
-We can frame this challenge as follows:
-
-```
-As a business owner
-I want to be able to view and manage the departments, roles, and employees in my company
-So that I can organize and plan my business
-```
-
-How do you deliver this? Here are some guidelines:
-
-* Use the [MySQL](https://www.npmjs.com/package/mysql) NPM package to connect to your MySQL database and perform queries.
-
-* Use [InquirerJs](https://www.npmjs.com/package/inquirer/v/0.2.3) NPM package to interact with the user via the command-line.
-
-* Use [console.table](https://www.npmjs.com/package/console.table) to print MySQL rows to the console. There is a built-in version of `console.table`, but the NPM package formats the data a little better for our purposes.
-
-* You may wish to have a separate file containing functions for performing specific SQL queries you'll need to use. Could a constructor function or a class be helpful for organizing these?
-
-* You will need to perform a variety of SQL JOINS to complete this assignment, and it's recommended you review the week's activities if you need a refresher on this.
-
-![Employee Tracker](Assets/employee-tracker.gif)
-
-### Hints
-
-* You may wish to include a `seed.sql` file to pre-populate your database. This will make development of individual features much easier.
-
-* Focus on getting the basic functionality completed before working on more advanced features.
-
-* Review the week's activities for a refresher on MySQL.
-
-* Check out [SQL Bolt](https://sqlbolt.com/) for some extra MySQL help.
-
-## Minimum Requirements
-
-* Functional application.
-
-* GitHub repository with a unique name and a README describing the project.
-
-* The command-line application should allow users to:
-
-  * Add departments, roles, employees
-
-  * View departments, roles, employees
-
-  * Update employee roles
-
-## Bonus
-
-* The command-line application should allow users to:
-
-  * Update employee managers
-
-  * View employees by manager
-
-  * Delete departments, roles, and employees
-
-  * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
-
-## Commit Early and Often
-
-One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:
-
-* Your commit history is a signal to employers that you are actively working on projects and learning new skills.
-
-* Your commit history allows you to revert your codebase in the event that you need to return to a previous state.
-
-Follow these guidelines for committing:
-
-* Make single-purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits.
-
-* Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history.
-
-* Don't commit half-done work, for the sake of your collaborators (and your future self!).
-
-* Test your application before you commit to ensure functionality at every step in the development process.
-
-We would like you to have well over 200 commits by graduation, so commit early and often!
+1. Access the source code and relevant materials through [GitHub](https://github.com/Longhuynh741/EmployeeTemplate-GT-FT). 
+2. Fork the project into your own exisitng repository <br> 
+*Optional. For refactoring and/or updating uses
+3. Clone the copy onto your local branch. *SHH key cloning preferred
+4. Using an installed Visual Studio Code or any other code editor, open the file and run "npm install" to install relevant node modules. *MySQL and inquirer modules needed to run this project
+5. Create your database in the MYSQL workbench. *** It is recommended that you use the file provided in "schema.sql" as a template for your database. 
+6. Correctly connect your database in the "server.js" file. This includes inputting the database name and your password.
+7. Run "npm server.js" in order to initialize the code. 
 
 
-## Submission on BCS
+(Optional): You can also install the [Prettier-Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension to aid in formating the code.
 
-You are required to submit the following:
+# Usage
 
-* The URL of the GitHub repository
+<h2> Using the terminal log, open into the working file. You must be in the working file in order to run node server.js correctly. Follow the prompts in the example starting with node server.js </h2>
 
-* A video demonstrating the entirety of the app's functionality 
+Example: <img src="" alt="NodeExample">
 
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+
+<h2> After answering the prompted questions, a generate table should appear. It should take into account the user's input and display relevant data. Look at the picture for a reference </h2>
+
+<img src="" alt="ReadMeExample">
+
+
+# Credits
+
+Repository Used: [GitHub](https://github.com/)
+
+Code Editor Used: [Visual Studio Code](https://code.visualstudio.com)
+
+Extensions: [Prettier-Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+All source code was provided to me by the staff/instructors of the GT-FT-FullStack team.
+# License
+
+MIT License
+
+Copyright (c) [2020] [LongHuynh]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
